@@ -9,12 +9,14 @@ namespace calculadora {
 
         /** Atributos **/
         private string numero;
+        private bool esPositivo;
 
         /**
          Constructor de clase que recibe un número en String
              */
         public Operando(string numero) {
             this.numero = numero;
+            this.esPositivo = true;
         }
 
         /**
@@ -22,6 +24,7 @@ namespace calculadora {
              */
         public Operando() {
             this.numero = "";
+            this.esPositivo = true;
         }
 
         /**
@@ -65,11 +68,43 @@ namespace calculadora {
         public void EliminarUltimoNumero() {
             string aux = "";
 
+            /* Para eliminar un número se recorre todo el string excepto la última posicion */
             for(int i = 0; i < this.numero.Length - 1; i++) {
                 aux += this.numero[i];
             }
 
             this.numero = aux;
+        }
+
+        public void CambiarSigno() {
+            string aux = "";
+            int comienzo;
+
+            /* Si es el número no es positivo tendremos que eliminar el signo negativo, por lo que 
+             * el recorrido empezará en la posición 1 en vez del 0, y si es positivo guardamos en aux
+             * el signo negativo y el comienzo es en 0 */
+            if (!esPositivo) {
+                comienzo = 1;
+                esPositivo = true;
+            } else {
+                aux = "-";
+                comienzo = 0;
+                esPositivo = false;
+            }
+
+            for (int i = comienzo; i < this.numero.Length; i++) {
+                aux += this.numero[i];
+            }
+
+            this.numero = aux;
+        }
+
+        /**
+         Reinicia el operando, es decir elimina todo dentro
+             */
+        public void ReiniciarOperando() {
+            this.numero = "";
+            this.esPositivo = true;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:calculadora"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="250">
+        Title="MainWindow" Height="500" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,30 +20,32 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- BOTONES -->
-        <Button x:Name="btnCE" Grid.Column="0" Grid.Row="1">CE</Button>
-        <Button x:Name="btnC" Grid.Column="1" Grid.Row="1">C</Button>
-        <Button x:Name="btnMenorIgual" Grid.Column="2" Grid.Row="1" Click="BtnMenorIgual_Click">&lt;=</Button>
-        <Button x:Name="btnSumar" Grid.Column="3" Grid.Row="1" Click="BtnSumar_Click">+</Button>
-        <Button x:Name="btnSiete" Grid.Column="0" Grid.Row="2" Click="BtnSiete_Click">7</Button>
-        <Button x:Name="btnOcho" Grid.Column="1" Grid.Row="2" Click="BtnOcho_Click">8</Button>
-        <Button x:Name="btnNueve" Grid.Column="2" Grid.Row="2" Click="BtnNueve_Click">9</Button>
-        <Button x:Name="btnRestar" Grid.Column="3" Grid.Row="2" Click="BtnRestar_Click">-</Button>
-        <Button x:Name="btnCuatro" Grid.Column="0" Grid.Row="3" Click="BtnCuatro_Click">4</Button>
-        <Button x:Name="btnCinco" Grid.Column="1" Grid.Row="3" Click="BtnCinco_Click">5</Button>
-        <Button x:Name="btnSeis" Grid.Column="2" Grid.Row="3" Click="BtnSeis_Click">6</Button>
-        <Button x:Name="btnMultiplicar" Grid.Column="3" Grid.Row="3" Click="BtnMultiplicar_Click">x</Button>
-        <Button x:Name="btnUno" Grid.Column="0" Grid.Row="4" Click="BtnUno_Click">1</Button>
-        <Button x:Name="btnDos" Grid.Column="1" Grid.Row="4" Click="BtnDos_Click">2</Button>
-        <Button x:Name="btnTres" Grid.Column="2" Grid.Row="4" Click="BtnTres_Click">3</Button>
-        <Button x:Name="btnDividir" Grid.Column="3" Grid.Row="4" Click="BtnDividir_Click">\</Button>
-        <Button x:Name="btnCero" Grid.Column="1" Grid.Row="5" Click="BtnCero_Click">0</Button>
-        <Button x:Name="btnIgual" Grid.Column="3" Grid.Row="5" Click="BtnIgual_Click">=</Button>
-        <Button x:Name="btnCambiarSigno" Grid.Column="0" Grid.Row="5" Click="BtnCambiarSigno_Click">+/-</Button>
+        <Button x:Name="btnCE" Grid.Column="0" Grid.Row="2" Click="BtnCE_Click">CE</Button>
+        <Button x:Name="btnC" Grid.Column="1" Grid.Row="2" Click="BtnC_Click">C</Button>
+        <Button x:Name="btnMenorIgual" Grid.Column="2" Grid.Row="2" Click="BtnMenorIgual_Click">&lt;=</Button>
+        <Button x:Name="btnSumar" Grid.Column="3" Grid.Row="2" Click="BtnSumar_Click">+</Button>
+        <Button x:Name="btnSiete" Grid.Column="0" Grid.Row="3" Click="BtnSiete_Click">7</Button>
+        <Button x:Name="btnOcho" Grid.Column="1" Grid.Row="3" Click="BtnOcho_Click">8</Button>
+        <Button x:Name="btnNueve" Grid.Column="2" Grid.Row="3" Click="BtnNueve_Click">9</Button>
+        <Button x:Name="btnRestar" Grid.Column="3" Grid.Row="3" Click="BtnRestar_Click">-</Button>
+        <Button x:Name="btnCuatro" Grid.Column="0" Grid.Row="4" Click="BtnCuatro_Click">4</Button>
+        <Button x:Name="btnCinco" Grid.Column="1" Grid.Row="4" Click="BtnCinco_Click">5</Button>
+        <Button x:Name="btnSeis" Grid.Column="2" Grid.Row="4" Click="BtnSeis_Click">6</Button>
+        <Button x:Name="btnMultiplicar" Grid.Column="3" Grid.Row="4" Click="BtnMultiplicar_Click">x</Button>
+        <Button x:Name="btnUno" Grid.Column="0" Grid.Row="5" Click="BtnUno_Click">1</Button>
+        <Button x:Name="btnDos" Grid.Column="1" Grid.Row="5" Click="BtnDos_Click">2</Button>
+        <Button x:Name="btnTres" Grid.Column="2" Grid.Row="5" Click="BtnTres_Click">3</Button>
+        <Button x:Name="btnDividir" Grid.Column="3" Grid.Row="5" Click="BtnDividir_Click">\</Button>
+        <Button x:Name="btnCero" Grid.Column="1" Grid.Row="6" Click="BtnCero_Click">0</Button>
+        <Button x:Name="btnIgual" Grid.Column="3" Grid.Row="6" Click="BtnIgual_Click">=</Button>
+        <Button x:Name="btnCambiarSigno" Grid.Column="0" Grid.Row="6" Click="BtnCambiarSigno_Click">+/-</Button>
 
         <!-- Caja de texto -->
-        <TextBox x:Name="txbPantalla" Grid.Column="0" Grid.Row="0" FontSize="36" HorizontalAlignment="Right" Grid.ColumnSpan="4">0</TextBox>
+        <TextBox x:Name="txbPantalla" Grid.Column="0" Grid.Row="1" FontSize="36" HorizontalAlignment="Right" Grid.ColumnSpan="4">0</TextBox>
+        <TextBox x:Name="txbOperacion" Grid.Column="0" Grid.Row="0" FontSize="25" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="4"></TextBox>
     </Grid>
 </Window>

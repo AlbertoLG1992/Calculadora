@@ -20,10 +20,9 @@ namespace calculadora{
     public partial class MainWindow : Window{
 
         /* Variables */
-        string  num1 = "",
-                num2 = "",
-                resultado = "",
-                operacion = "";
+        string  resultado = "",
+                operacion = "",
+                operacionCompleta = "";
         Operando    operando1,
                     operando2;
 
@@ -104,10 +103,16 @@ namespace calculadora{
         }
 
         /**
-         Método para cambiar el simbolo del número con el que estamos operando
+         Método para cambiar el simbolo del operando que estamos rellenando
              */
         private void BtnCambiarSigno_Click(object sender, RoutedEventArgs e) {
-            
+            if(this.operacion.Length == 0) {
+                this.operando1.CambiarSigno();
+                this.PintarNumero(this.operando1.GetOperandoString());
+            } else {
+                this.operando2.CambiarSigno();
+                this.PintarNumero(this.operando2.GetOperandoString());
+            }
         }
 
         /** 
@@ -121,6 +126,30 @@ namespace calculadora{
                 this.operando2.EliminarUltimoNumero();
                 this.PintarNumero(this.operando2.GetOperandoString());
             }
+        }
+
+        /**
+         Método que ocurre al pulsar C, pone la calculadora todo a 0;
+             */
+        private void BtnC_Click(object sender, RoutedEventArgs e) {
+            this.operando1.ReiniciarOperando();
+            this.operando2.ReiniciarOperando();
+            this.operacion = "";
+            this.operacionCompleta = "";
+            this.PintarOperacionCompleta();
+            this.PintarNumero("");
+        }
+
+        /**
+         Método que ocurre al pulsar CE, pone a 0 el operador en el que esté
+             */
+        private void BtnCE_Click(object sender, RoutedEventArgs e) {
+            if(operacion.Length == 0) {
+                this.operando1.ReiniciarOperando();
+            } else {
+                this.operando2.ReiniciarOperando();
+            }
+            this.PintarNumero("0");
         }
 
         /** 
@@ -178,8 +207,15 @@ namespace calculadora{
                             break;
                         }
                 }
-
+                this.operacionCompleta += this.operando2.GetOperandoString() + " = ";
+                this.PintarOperacionCompleta();
                 this.PintarNumero(this.resultado);
+
+                /* Se reinician los operandos y el signo para poder seguir haciendo operaciones
+                 * tras pulsar igual*/
+                this.operando1.ReiniciarOperando();
+                this.operando2.ReiniciarOperando();
+                this.operacion = "";
             }
         }
 
@@ -194,6 +230,11 @@ namespace calculadora{
             if (operacion.Length == 0) {
                 this.operando1.AddNumero(num);
                 this.PintarNumero(this.operando1.GetOperandoString());
+
+                /* Se elimina la operacion completa para borrarlo de la pantalla
+                 * cuando se inserta de nuevo el operando 1*/
+                this.operacionCompleta = "";
+                this.PintarOperacionCompleta();
             } else {
                 this.operando2.AddNumero(num);
                 this.PintarNumero(this.operando2.GetOperandoString());
@@ -210,6 +251,10 @@ namespace calculadora{
              * mientras que ya se ha empezado a rellenar el segundo número */
             if(this.operando2.EstaVacio()) {
                 this.operacion = operacion;
+                /* Se agrega a operacion completa el primer operando y el operador, para mostrarlo
+                 * por pantalla */
+                this.operacionCompleta = this.operando1.GetOperandoString() + " " + this.operacion + " ";
+                this.PintarOperacionCompleta();
             }
         }
 
@@ -218,6 +263,13 @@ namespace calculadora{
             */
         private void PintarNumero(string num) {
             txbPantalla.Text = num;
+        }
+
+        /**
+         Pinta el string operacionCompleta en la pantalla
+             */
+        private void PintarOperacionCompleta() {
+            txbOperacion.Text = this.operacionCompleta;
         }
     }
 }
