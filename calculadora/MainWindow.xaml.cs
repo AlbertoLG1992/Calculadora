@@ -24,9 +24,13 @@ namespace calculadora{
                 num2 = "",
                 resultado = "",
                 operacion = "";
+        Operando    operando1,
+                    operando2;
 
         public MainWindow() {
             InitializeComponent();
+            this.operando1 = new Operando();
+            this.operando2 = new Operando();
         }
 
         /** 
@@ -107,24 +111,15 @@ namespace calculadora{
         }
 
         /** 
-         Método al pulsar para eliminar un número 
+         Método al pulsar para eliminar un número del perando
             */
         private void BtnMenorIgual_Click(object sender, RoutedEventArgs e) {
-            string numAux = "";
-            /* Recorre el string menos uno para y lo graba, de esta forma el último
-             * queda borrado */
-            if (operacion.Length == 0) { //NUM1
-                for (int i = 0; i < this.num1.Length - 1; i++) {
-                    numAux += this.num1[i];
-                }
-                this.num1 = numAux;
-                this.PintarNumero(this.num1);
-            } else { //NUM2
-                for (int i = 0; i < this.num2.Length - 1; i++) {
-                    numAux += this.num2[i];
-                }
-                this.num2 = numAux;
-                this.PintarNumero(this.num2);
+            if (operacion.Length == 0) { //OPERANDO1
+                this.operando1.EliminarUltimoNumero();
+                this.PintarNumero(this.operando1.GetOperandoString());
+            } else { //OPERANDO2
+                this.operando2.EliminarUltimoNumero();
+                this.PintarNumero(this.operando2.GetOperandoString());
             }
         }
 
@@ -161,56 +156,47 @@ namespace calculadora{
          pantalla
              */
         private void BtnIgual_Click(object sender, RoutedEventArgs e) {
-            /* Se comprueba que los dos números estan rellenos, no es necesario
+            /* Se comprueba que los dos operando estan rellenos, no es necesario
              * comprobar la operación pues ya se ha comprobado anteriormente */
-            if(this.num1.Length != 0 && this.num2.Length != 0) {
-                /* Se pasan los string a double para operar con ellos, double por si hemos
-                 * metido decimales o por si vamos a hacer divisiones y queremos ver los
-                 * decimales de las operaciones */
-                double numero1, numero2;
-                double.TryParse(this.num1, out numero1);
-                double.TryParse(this.num2, out numero2);
+            if(!this.operando2.EstaVacio() && !this.operando2.EstaVacio()) {
 
                 switch (this.operacion) {
                     case "+": {
-                            this.resultado = (numero1 + numero2).ToString();
+                            this.resultado = (this.operando1.GetOperandoDouble() + this.operando2.GetOperandoDouble()).ToString();
                             break;
                         }
                     case "-": {
-                            this.resultado = (numero1 - numero2).ToString();
+                            this.resultado = (this.operando1.GetOperandoDouble() - this.operando2.GetOperandoDouble()).ToString();
                             break;
                         }
                     case "*": {
-                            this.resultado = (numero1 * numero2).ToString();
+                            this.resultado = (this.operando1.GetOperandoDouble() * this.operando2.GetOperandoDouble()).ToString();
                             break;
                         }
                     case "/": {
-                            this.resultado = (numero1 / numero2).ToString();
+                            this.resultado = (this.operando1.GetOperandoDouble() / this.operando2.GetOperandoDouble()).ToString();
                             break;
                         }
                 }
 
                 this.PintarNumero(this.resultado);
-            } else if(this.operacion.Length == 0) {
-                this.resultado = this.num1;
-                this.PintarNumero(this.resultado);
             }
         }
 
         /**
-         Recibe un entero y lo agrega a num1 o num2, además lo envia para
+         Recibe un entero y lo agrega a operando1 u operando2, además lo envia para
          pintar en pantalla
              */
         private void RellenarNumero(string num) {
             /* Si la operación aun no ha sido decidida se sigue rellenando
-             * el primer número, en caso contrario estamos seguros de que es
-             * el segundo número */
+             * el primer operando, en caso contrario estamos seguros de que es
+             * el segundo operando */
             if (operacion.Length == 0) {
-                this.num1 += num;
-                this.PintarNumero(this.num1);
+                this.operando1.AddNumero(num);
+                this.PintarNumero(this.operando1.GetOperandoString());
             } else {
-                this.num2 += num;
-                this.PintarNumero(this.num2);
+                this.operando2.AddNumero(num);
+                this.PintarNumero(this.operando2.GetOperandoString());
             }
         }
 
@@ -219,10 +205,10 @@ namespace calculadora{
          simbolo de la operación
              */
         private void RellenarOperacion(string operacion) {
-            /* La condición para que se grabe correctamente es que el número 2 no se
+            /* La condición para que se grabe correctamente es que el operando 2 no se
              * haya empezado a rellenar, para no poder cambiar el simbolo de la operación
              * mientras que ya se ha empezado a rellenar el segundo número */
-            if(this.num2.Length == 0) {
+            if(this.operando2.EstaVacio()) {
                 this.operacion = operacion;
             }
         }
