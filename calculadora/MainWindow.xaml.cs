@@ -248,8 +248,9 @@ namespace calculadora{
         private void RellenarOperacion(string operacion) {
             /* La condición para que se grabe correctamente es que el operando 2 no se
              * haya empezado a rellenar, para no poder cambiar el simbolo de la operación
-             * mientras que ya se ha empezado a rellenar el segundo número */
-            if(this.operando2.EstaVacio()) {
+             * mientras que ya se ha empezado a rellenar el segundo número, tambien se se 
+             * comprueba que el operando1 no esté vacio */
+            if(this.operando2.EstaVacio() && !this.operando1.EstaVacio()) {
                 this.operacion = operacion;
                 /* Se agrega a operacion completa el primer operando y el operador, para mostrarlo
                  * por pantalla */
